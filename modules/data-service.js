@@ -38,16 +38,14 @@ module.exports = function(mongoDBConnectionString){
                 });
             });
         },
-        getAllPosts: function(page, perPage, category, tag){
+        getAllPosts: function(page, perPage){
             return new Promise((resolve,reject)=>{
                 if(+page && +perPage){
                     
                         let filter = {}; 
-                        if(category) filter.category = category;
-                        if(tag) filter.tags = {$in: ["#" + tag]};
 
                         page = (+page) - 1;                      
-                        Post.find(filter).sort({postDate: -1}).skip(page * +perPage).limit(+perPage).exec().then(posts=>{
+                        Post.find().sort({postDate: -1}).skip(page * +perPage).limit(+perPage).exec().then(posts=>{
                             resolve(posts)
                         }).catch(err=>{
                             reject(err);
