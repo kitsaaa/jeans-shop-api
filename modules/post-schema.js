@@ -12,4 +12,4 @@ let postSchema = new Schema({
     versionKey: false
 });
 
-module.exports = {postSchema};
+module.exports = mongoose.model("Post", postSchema);
